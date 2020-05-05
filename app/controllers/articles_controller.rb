@@ -1,10 +1,21 @@
 class ArticlesController < ApplicationController
+	protect_from_forgery except: :index
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
 
 	def index
+		@articles = Article.where("created_at >= ?", 1.week.ago.utc)
+
+		respond_to do |format|
+			format.html 
+			format.js
+		end
 	end
 
 	def show
+		respond_to do |format|
+			format.html 
+			format.js
+		end
 	end
 
 	def new

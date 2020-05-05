@@ -1,0 +1,20 @@
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Created</th>
+		</tr>		
+	</thead>
+	<tbody>
+		<% @articles.each do |article| %>
+		<tr>			
+				<div class="article">
+					<th><%= link_to "#{article.title}", article_path(article) %></th>
+					<th>Created <%= time_ago_in_words(article.created_at) %> ago.</th>
+					<th><%= link_to 'Edit', edit_article_path(article) %></th>
+					<th><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></th>
+				</div>
+			</tr>
+		<% end %>	
+	</tbody>
+</table>
