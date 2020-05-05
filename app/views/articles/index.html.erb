@@ -1,7 +1,13 @@
 <h1>Articles</h1>
 
-<%= link_to 'New Article', new_article_path %></br>
+<%= link_to 'New Article', new_article_path, remote: true %></br>
 <%= link_to "Show articles", articles_path, remote: true %>
 
-<p><div id="content">
-</div></p>
+<div id="content">
+</div>
+
+<div id="article">
+</div>
+
+<div id="form">
+</div>
