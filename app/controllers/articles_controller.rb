@@ -26,6 +26,7 @@ class ArticlesController < ApplicationController
 		@article = Article.new(article_params)
 		if @article.save
 			redirect_to articles_url, notice: 'Article was successfully created.'
+			ActionCable.server.broadcast 'activity_channel', content: "Created article: #{@article.title}"
 		else
 			render :new
 		end
@@ -36,6 +37,7 @@ class ArticlesController < ApplicationController
 
 	def update
 		if @article.update(article_params)
+			ActionCable.server.broadcast 'activity_channel', content: "Edited article: #{@article.title}"
 			redirect_to articles_url, notice: 'Article was successfully updated.'
 		else
 			render :edit
@@ -45,6 +47,7 @@ class ArticlesController < ApplicationController
 	def destroy
 		@article.destroy
 		redirect_to articles_url, notice: 'Article was successfully destroyed.'
+		ActionCable.server.broadcast 'activity_channel', content: "Deleted article: #{@article.title}"
 	end
 
 	private
